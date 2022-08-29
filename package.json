@@ -1,0 +1,25 @@
+{
+  "name": "apache_socket_io",
+  "version": "1.0.0",
+  "description": "Here is how to set up Apache server for NodeJs socket.io.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/avetiq-dev/apache_socket_io.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/avetiq-dev/apache_socket_io/issues"
+  },
+  "homepage": "https://github.com/avetiq-dev/apache_socket_io#readme",
+  "dependencies": {
+    "express": "^4.18.1",
+    "http": "0.0.1-security",
+    "socket.io": "^4.5.1"
+  },
+  "devDependencies": {}
+}

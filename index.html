@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Socket.Io</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<div class="main-container">
+    <div class="card">
+        <h3 id="users-count"></h3>
+        <table id="customers">
+            <tr>
+                <th>Browser</th>
+                <th>IP</th>
+                <th>Connected Time</th>
+            </tr>
+            <tbody>
+
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+<script src="node_modules/socket.io/client-dist/socket.io.js"></script>
+<script>
+    const socket = io('ws://example.site');
+    const id = Date.now();
+    window.user_socket_id = id;
+    window.socketIo = socket;
+    socket.emit('AddUser', {});
+
+    setTimeout(() => {
+        const customers = document.getElementById('customers');
+        socketIo.on('getClients', function (data) {
+            document.getElementById('users-count').innerText = 'Users Count: ' + Object.keys(data.clients).length
+            const tbody = document.createElement('tbody');
+            Object.keys(data.clients).forEach(key => {
+                const tr = document.createElement('tr');
+                Object.keys(data.clients[key]).forEach(key2 => {
+                    const td = document.createElement('td');
+                    td.innerText = data.clients[key][key2];
+                    tr.appendChild(td)
+                });
+                tbody.appendChild(tr);
+                customers.removeChild(customers.lastChild);
+                customers.appendChild(tbody)
+            });
+        })
+    }, 1)
+</script>
+</body>
+</html>
